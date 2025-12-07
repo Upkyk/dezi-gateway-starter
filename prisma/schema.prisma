@@ -1,0 +1,44 @@
+// Dezi Gateway Dev Starter - Prisma Schema
+// PostgreSQL database schema for user management and login event tracking
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model - stores Dezi-authenticated users
+model User {
+  id          String   @id @default(uuid())
+  deziNummer  String   @unique // Unique Dezi identifier
+  displayName String?  // Optional display name from Dezi claims
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  loginEvents LoginEvent[]
+
+  @@map("users")
+}
+
+// LoginEvent model - audit log of all Dezi login events
+model LoginEvent {
+  id           String   @id @default(uuid())
+  userId       String
+  abonneeNummer String  // Subscriber number from Dezi
+  deziRoleCode  String  // Role code (e.g., "01", "02")
+  deziRoleName  String  // Role name (e.g., "Huisarts", "Apotheker")
+  ipAddress    String?  // Client IP address (optional for privacy)
+  userAgent    String?  // Browser user agent (optional)
+  createdAt    DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("login_events")
+}
