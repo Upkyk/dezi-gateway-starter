@@ -11,7 +11,7 @@ Een schone, goed gestructureerde starter kit voor het integreren van **Dezi** (N
 
 ## Overzicht
 
-Dit is geen volledig SaaS-product, maar een ontwikkelaar-gerichte starter kit die laat zien hoe je Dezi-authenticatie implementeert in een moderne JavaScript/TypeScript stack, met een volledige Next.js-referentie-implementatie.
+Deze starter kit laat zien hoe je Dezi-authenticatie implementeert in een moderne JavaScript/TypeScript stack, met een volledige Next.js-referentie-implementatie.
 
 Belangrijk: deze starter verwerkt alleen Dezi identiteitsgegevens (claims zoals dezi_nummer en rol), en geen medische dossiers of patiëntdata.
 
