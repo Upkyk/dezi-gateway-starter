@@ -515,31 +515,47 @@ npm run build  # Moet zonder fouten bouwen
 
 ### Hoe krijg ik Dezi credentials?
 
-Neem contact op met Dezi voor het registreren van je applicatie. Je ontvangt:
-- Client ID
-- Instructies voor het genereren van een keypair
-- URL's voor de test- en productieomgeving
+Neem contact op met Dezi voor het registreren van je applicatie.  
+Afhankelijk van de fase van het Dezi-stelsel ontvang je:
 
-### Wat als de JWE ontsleuteling faalt?
+- een Client ID
+- instructies voor het genereren van een keypair
+- toegang tot de beschikbare pilot- of testvoorzieningen
+- informatie over de productie-aansluiting zodra deze beschikbaar is
+
+**Let op**: Dezi bevindt zich nog in opbouw en niet alle omgevingen zijn al publiek beschikbaar.
+
+### Wat als de JWE-ontsleuteling faalt?
 
 Controleer:
-1. Is de private key correct in PEM formaat?
-2. Komt de public key overeen met wat bij Dezi is geregistreerd?
-3. Gebruik je het juiste algoritme (RSA-OAEP-256)?
 
-### Hoe test ik zonder echte Dezi omgeving?
+- staat je private key in correct PEM-formaat?
+- komt de public key overeen met wat bij Dezi is geregistreerd?
+- gebruik je de juiste algoritmes (bijv. RSA-OAEP-256 voor JWE)?
+- valideer je de nonce en audience correct?
 
-Je kunt een mock OIDC provider opzetten met tools zoals:
-- [oidc-provider](https://github.com/panva/node-oidc-provider)
-- [Keycloak](https://www.keycloak.org/)
+### Hoe test ik zonder echte Dezi-omgeving?
+
+Momenteel kun je testen met:
+
+- de ingebouwde **Demo Mode** van deze starter kit
+- een eigen mock OIDC-provider, bijvoorbeeld:
+  - [oidc-provider](https://github.com/panva/node-oidc-provider)
+  - [Keycloak](https://www.keycloak.org/) (met custom claims)
+
+Zodra Dezi openbare testvoorzieningen aanbiedt, kun je die integreren.
 
 ### Kan ik dit gebruiken met andere frameworks?
 
-De `deziClient.ts` module is framework-agnostisch. Je kunt de OIDC logica hergebruiken in:
+Ja. De module `deziClient.ts` is framework-agnostisch.  
+Je kunt de OIDC-logica hergebruiken in:
+
 - Express.js
 - Fastify
 - NestJS
-- Andere Node.js frameworks
+- Hono
+- Koa
+- elke andere Node.js-omgeving
 
 ---
 
